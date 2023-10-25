@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Row(
-          children: [
+          children: const [
             Expanded(
               child: Center(
                 child: MyForm(),
@@ -47,6 +47,13 @@ class MyForm extends StatefulWidget {
 
 class _MyFormState extends State<MyForm> {
   String? dropdownValue;
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +63,25 @@ class _MyFormState extends State<MyForm> {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
+            controller: _controller,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Enter your income',
               prefixIcon: const Padding(
                 padding: EdgeInsets.all(12.0),
-                child: Icon(Icons.attach_money),
+                child: Icon(
+                  Icons.attach_money,
+                  color: Colors.green,
+                ),
               ),
             ),
             keyboardType: TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
             ],
+            onChanged: (value) {
+              context.read<RuleModel>().calculateResult(value, dropdownValue);
+            },
           ),
           const SizedBox(height: 20),
           DropdownButton<String>(
@@ -77,8 +91,10 @@ class _MyFormState extends State<MyForm> {
             onChanged: (String? newValue) {
               setState(() {
                 dropdownValue = newValue;
-                context.read<RuleModel>().selectRule(newValue);
               });
+              context
+                  .read<RuleModel>()
+                  .calculateResult(_controller.text, newValue);
             },
             items: <String>[
               'Rule 70/20/10',
@@ -109,10 +125,10 @@ class MyTextWidget extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(30),
           child: Text(
-            ruleModel.selectedRule != null
-                ? 'You chose ${ruleModel.selectedRule}'
-                : 'Please choose a budgeting rule',
-            textAlign: TextAlign.justify,
+            ruleModel.dividedIncome != null
+                ? '${ruleModel.dividedIncome}'
+                : 'Please choose a budgeting rule and enter your income',
+            textAlign: TextAlign.center,
           ),
         );
       },
@@ -121,12 +137,57 @@ class MyTextWidget extends StatelessWidget {
 }
 
 class RuleModel extends ChangeNotifier {
-  String? _selectedRule;
-
-  String? get selectedRule => _selectedRule;
+  String? selectedRule;
+  String? dividedIncome;
 
   void selectRule(String? rule) {
-    _selectedRule = rule;
+    selectedRule = rule;
+    notifyListeners();
+  }
+
+  void calculateResult(String income, String? rule) {
+    if (income.isEmpty || rule == null) {
+      dividedIncome = null;
+    } else {
+      double incomeDouble = double.tryParse(income) ?? 0;
+      switch (rule) {
+        case 'Rule 70/20/10':
+          dividedIncome = '''
+            Living Expenses and debts: ${(incomeDouble * 0.7).toStringAsFixed(2)}
+            Investing and Savings: ${(incomeDouble * 0.2).toStringAsFixed(2)}
+            Consumption and Lifestyle: ${(incomeDouble * 0.1).toStringAsFixed(2)}
+            ''';
+          break;
+        case 'Rule 50/30/20':
+          dividedIncome = '''
+            Living Expenses: ${(incomeDouble * 0.5).toStringAsFixed(2)}
+            Consumption and Lifestyle: ${(incomeDouble * 0.3).toStringAsFixed(2)}
+            Savings and Debts: ${(incomeDouble * 0.2).toStringAsFixed(2)}
+            ''';
+          break;
+        case 'Rule 30/30/40':
+          dividedIncome = '''
+            Living Expenses: ${(incomeDouble * 0.3).toStringAsFixed(2)}
+            Investing and Savings: ${(incomeDouble * 0.3).toStringAsFixed(2)}
+            Consumption and Lifestyle: ${(incomeDouble * 0.4).toStringAsFixed(2)}
+            ''';
+          break;
+        case 'Rule 80/20':
+          dividedIncome = '''
+            Living Expenses, Lifestyle and Debts: ${(incomeDouble * 0.8).toStringAsFixed(2)}
+            Investing and Savings: ${(incomeDouble * 0.2).toStringAsFixed(2)}
+            ''';
+          break;
+        case 'Rule 60/40':
+          dividedIncome = '''
+            Living Expenses, Lifestyle and Debts: ${(incomeDouble * 0.6).toStringAsFixed(2)}
+            Investing and Savings: ${(incomeDouble * 0.4).toStringAsFixed(2)}
+            ''';
+          break;
+        default:
+          break;
+      }
+    }
     notifyListeners();
   }
 }
