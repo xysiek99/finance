@@ -64,9 +64,11 @@ class _MyFormState extends State<MyForm> {
         children: [
           TextField(
             controller: _controller,
+            style: TextStyle(fontSize: 18),
             decoration: InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Enter your income',
+              labelStyle: TextStyle(fontSize: 18),
               prefixIcon: const Padding(
                 padding: EdgeInsets.all(12.0),
                 child: Icon(
@@ -87,7 +89,7 @@ class _MyFormState extends State<MyForm> {
           DropdownButton<String>(
             isExpanded: true,
             value: dropdownValue,
-            hint: const Text('Budgeting Rule'),
+            hint: Text('Budgeting Rule', style: TextStyle(fontSize: 18)),
             onChanged: (String? newValue) {
               setState(() {
                 dropdownValue = newValue;
@@ -105,7 +107,7 @@ class _MyFormState extends State<MyForm> {
             ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(value, style: TextStyle(fontSize: 18)),
               );
             }).toList(),
           ),
@@ -124,11 +126,44 @@ class MyTextWidget extends StatelessWidget {
       builder: (context, ruleModel, child) {
         return Padding(
           padding: const EdgeInsets.all(30),
-          child: Text(
-            ruleModel.dividedIncome != null
-                ? '${ruleModel.dividedIncome}'
-                : 'Please choose a budgeting rule and enter your income',
-            textAlign: TextAlign.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: ruleModel.labels.isNotEmpty && ruleModel.values.isNotEmpty
+                ? List.generate(ruleModel.labels.length, (index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          ruleModel.labels[index],
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w300,
+                            height: 2.0,
+                          ),
+                        ),
+                        Text(
+                          ruleModel.values[index],
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            height: 2.0,
+                          ),
+                        ),
+                      ],
+                    );
+                  })
+                : [
+                    Text(
+                      'Please choose a budgeting rule and enter your income',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                        height: 2.0,
+                      ),
+                    ),
+                  ],
           ),
         );
       },
@@ -137,52 +172,72 @@ class MyTextWidget extends StatelessWidget {
 }
 
 class RuleModel extends ChangeNotifier {
-  String? selectedRule;
-  String? dividedIncome;
-
-  void selectRule(String? rule) {
-    selectedRule = rule;
-    notifyListeners();
-  }
+  List<String> labels = [];
+  List<String> values = [];
 
   void calculateResult(String income, String? rule) {
-    if (income.isEmpty || rule == null) {
-      dividedIncome = null;
-    } else {
+    labels.clear();
+    values.clear();
+
+    if (income.isNotEmpty && rule != null) {
       double incomeDouble = double.tryParse(income) ?? 0;
+
       switch (rule) {
         case 'Rule 70/20/10':
-          dividedIncome = '''
-            Living Expenses and debts: ${(incomeDouble * 0.7).toStringAsFixed(2)}
-            Investing and Savings: ${(incomeDouble * 0.2).toStringAsFixed(2)}
-            Consumption and Lifestyle: ${(incomeDouble * 0.1).toStringAsFixed(2)}
-            ''';
+          labels = [
+            'Living Expenses and debts:',
+            'Investing and Savings:',
+            'Consumption and Lifestyle:'
+          ];
+          values = [
+            '${(incomeDouble * 0.7).toStringAsFixed(2)} \$',
+            '${(incomeDouble * 0.2).toStringAsFixed(2)} \$',
+            '${(incomeDouble * 0.1).toStringAsFixed(2)} \$',
+          ];
           break;
         case 'Rule 50/30/20':
-          dividedIncome = '''
-            Living Expenses: ${(incomeDouble * 0.5).toStringAsFixed(2)}
-            Consumption and Lifestyle: ${(incomeDouble * 0.3).toStringAsFixed(2)}
-            Savings and Debts: ${(incomeDouble * 0.2).toStringAsFixed(2)}
-            ''';
+          labels = [
+            'Living Expenses:',
+            'Consumption and Lifestyle:',
+            'Savings and Debts:'
+          ];
+          values = [
+            '${(incomeDouble * 0.5).toStringAsFixed(2)} \$',
+            '${(incomeDouble * 0.3).toStringAsFixed(2)} \$',
+            '${(incomeDouble * 0.2).toStringAsFixed(2)} \$',
+          ];
           break;
         case 'Rule 30/30/40':
-          dividedIncome = '''
-            Living Expenses: ${(incomeDouble * 0.3).toStringAsFixed(2)}
-            Investing and Savings: ${(incomeDouble * 0.3).toStringAsFixed(2)}
-            Consumption and Lifestyle: ${(incomeDouble * 0.4).toStringAsFixed(2)}
-            ''';
+          labels = [
+            'Living Expenses:',
+            'Investing and Savings:',
+            'Consumption and Lifestyle:'
+          ];
+          values = [
+            '${(incomeDouble * 0.3).toStringAsFixed(2)} \$',
+            '${(incomeDouble * 0.3).toStringAsFixed(2)} \$',
+            '${(incomeDouble * 0.4).toStringAsFixed(2)} \$',
+          ];
           break;
         case 'Rule 80/20':
-          dividedIncome = '''
-            Living Expenses, Lifestyle and Debts: ${(incomeDouble * 0.8).toStringAsFixed(2)}
-            Investing and Savings: ${(incomeDouble * 0.2).toStringAsFixed(2)}
-            ''';
+          labels = [
+            'Living Expenses, Lifestyle and Debts:',
+            'Investing and Savings:'
+          ];
+          values = [
+            '${(incomeDouble * 0.8).toStringAsFixed(2)} \$',
+            '${(incomeDouble * 0.2).toStringAsFixed(2)} \$',
+          ];
           break;
         case 'Rule 60/40':
-          dividedIncome = '''
-            Living Expenses, Lifestyle and Debts: ${(incomeDouble * 0.6).toStringAsFixed(2)}
-            Investing and Savings: ${(incomeDouble * 0.4).toStringAsFixed(2)}
-            ''';
+          labels = [
+            'Living Expenses, Lifestyle and Debts:',
+            'Investing and Savings:'
+          ];
+          values = [
+            '${(incomeDouble * 0.6).toStringAsFixed(2)} \$',
+            '${(incomeDouble * 0.4).toStringAsFixed(2)} \$',
+          ];
           break;
         default:
           break;
