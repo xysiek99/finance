@@ -20,15 +20,31 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Row(
-          children: const [
+          children: [
             Expanded(
-              child: Center(
-                child: MyForm(),
+              child: Container(
+                height: 225,
+                margin: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 0.7),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Center(
+                  child: MyForm(),
+                ),
               ),
             ),
             Expanded(
-              child: Center(
-                child: MyTextWidget(),
+              child: Container(
+                height: 225,
+                margin: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 0.7),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: const Center(
+                  child: MyTextWidget(),
+                ),
               ),
             ),
           ],
