@@ -177,28 +177,41 @@ class MyTextWidget extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(
-                              ruleModel.iconInfos[index].icon,
-                              color: ruleModel.iconInfos[index].color,
-                              size: 36,
+                            Container(
+                              height:
+                                  50, // Wysokość kontenera równa wysokości ikony
+                              alignment: Alignment.center,
+                              child: Icon(
+                                ruleModel.iconInfos[index].icon,
+                                color: ruleModel.iconInfos[index].color,
+                                size: 36,
+                              ),
                             ),
                             SizedBox(width: 20),
-                            Text(
-                              ruleModel.labels[index],
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w300,
-                                height: 2.5,
+                            Container(
+                              height:
+                                  50, // Wysokość kontenera równa wysokości ikony
+                              alignment: Alignment.center,
+                              child: Text(
+                                ruleModel.labels[index],
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w300,
+                                ),
                               ),
                             ),
                           ],
                         ),
-                        Text(
-                          ruleModel.values[index],
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            height: 2.5,
+                        Container(
+                          height:
+                              50, // Wysokość kontenera równa wysokości ikony
+                          alignment: Alignment.center,
+                          child: Text(
+                            ruleModel.values[index],
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ],
@@ -250,7 +263,7 @@ class RuleModel extends ChangeNotifier {
           iconInfos = [
             IconInfo(Icons.home, Colors.purple),
             IconInfo(Icons.savings_rounded, Colors.lightGreen),
-            IconInfo(Icons.shopping_basket, Colors.amber),
+            IconInfo(Icons.shopping_cart, Colors.amber),
           ];
           break;
         case 'Rule 50/30/20':
@@ -266,7 +279,7 @@ class RuleModel extends ChangeNotifier {
           ];
           iconInfos = [
             IconInfo(Icons.car_repair, Colors.brown),
-            IconInfo(Icons.shopping_basket, Colors.amber),
+            IconInfo(Icons.shopping_cart, Colors.amber),
             IconInfo(Icons.credit_card, Colors.blue),
           ];
           break;
@@ -284,7 +297,7 @@ class RuleModel extends ChangeNotifier {
           iconInfos = [
             IconInfo(Icons.car_repair, Colors.brown),
             IconInfo(Icons.savings_rounded, Colors.lightGreen),
-            IconInfo(Icons.shopping_basket, Colors.amber),
+            IconInfo(Icons.shopping_cart, Colors.amber),
           ];
           break;
         case 'Rule 80/20':
