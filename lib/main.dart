@@ -25,7 +25,8 @@ class MainApp extends StatelessWidget {
               child: Center(
                 child: Container(
                   height: 225,
-                  margin: const EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.only(
+                      left: 16, right: 8, top: 16, bottom: 16),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 0.7),
                     borderRadius: BorderRadius.circular(10),
@@ -40,7 +41,8 @@ class MainApp extends StatelessWidget {
               child: Center(
                 child: Container(
                   height: 225,
-                  margin: const EdgeInsets.all(8.0),
+                  margin: const EdgeInsets.only(
+                      left: 8, right: 16, top: 16, bottom: 16),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black, width: 0.7),
                     borderRadius: BorderRadius.circular(10),
@@ -178,8 +180,7 @@ class MyTextWidget extends StatelessWidget {
                         Row(
                           children: [
                             Container(
-                              height:
-                                  50, // Wysokość kontenera równa wysokości ikony
+                              height: 50,
                               alignment: Alignment.center,
                               child: Icon(
                                 ruleModel.iconInfos[index].icon,
@@ -189,8 +190,7 @@ class MyTextWidget extends StatelessWidget {
                             ),
                             SizedBox(width: 20),
                             Container(
-                              height:
-                                  50, // Wysokość kontenera równa wysokości ikony
+                              height: 50,
                               alignment: Alignment.center,
                               child: Text(
                                 ruleModel.labels[index],
@@ -203,8 +203,7 @@ class MyTextWidget extends StatelessWidget {
                           ],
                         ),
                         Container(
-                          height:
-                              50, // Wysokość kontenera równa wysokości ikony
+                          height: 50,
                           alignment: Alignment.center,
                           child: Text(
                             ruleModel.values[index],
