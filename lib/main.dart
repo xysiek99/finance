@@ -22,28 +22,32 @@ class MainApp extends StatelessWidget {
         body: Row(
           children: [
             Expanded(
-              child: Container(
-                height: 225,
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 0.7),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Center(
-                  child: MyForm(),
+              child: Center(
+                child: Container(
+                  height: 225,
+                  margin: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 0.7),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Center(
+                    child: MyForm(),
+                  ),
                 ),
               ),
             ),
             Expanded(
-              child: Container(
-                height: 225,
-                margin: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 0.7),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: const Center(
-                  child: MyTextWidget(),
+              child: Center(
+                child: Container(
+                  height: 225,
+                  margin: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 0.7),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Center(
+                    child: MyTextWidget(),
+                  ),
                 ),
               ),
             ),
@@ -52,6 +56,16 @@ class MainApp extends StatelessWidget {
       ),
     );
   }
+}
+
+class IconInfo {
+  IconData icon;
+  Color color;
+
+  IconInfo(
+    this.icon,
+    this.color,
+  );
 }
 
 class MyForm extends StatefulWidget {
@@ -85,12 +99,23 @@ class _MyFormState extends State<MyForm> {
               border: OutlineInputBorder(),
               labelText: 'Enter your income',
               labelStyle: TextStyle(fontSize: 18),
-              prefixIcon: const Padding(
-                padding: EdgeInsets.all(12.0),
-                child: Icon(
-                  Icons.attach_money,
-                  color: Colors.green,
-                ),
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    height: 30,
+                    width: 2,
+                    color: Colors.grey,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Icon(
+                      Icons.attach_money,
+                      color: Colors.green,
+                      size: 30,
+                    ),
+                  ),
+                ],
               ),
             ),
             keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -101,7 +126,7 @@ class _MyFormState extends State<MyForm> {
               context.read<RuleModel>().calculateResult(value, dropdownValue);
             },
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 25),
           DropdownButton<String>(
             isExpanded: true,
             value: dropdownValue,
@@ -150,20 +175,30 @@ class MyTextWidget extends StatelessWidget {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          ruleModel.labels[index],
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w300,
-                            height: 2.0,
-                          ),
+                        Row(
+                          children: [
+                            Icon(
+                              ruleModel.iconInfos[index].icon,
+                              color: ruleModel.iconInfos[index].color,
+                              size: 36,
+                            ),
+                            SizedBox(width: 20),
+                            Text(
+                              ruleModel.labels[index],
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w300,
+                                height: 2.5,
+                              ),
+                            ),
+                          ],
                         ),
                         Text(
                           ruleModel.values[index],
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
-                            height: 2.0,
+                            height: 2.5,
                           ),
                         ),
                       ],
@@ -176,7 +211,7 @@ class MyTextWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w300,
-                        height: 2.0,
+                        height: 2.5,
                       ),
                     ),
                   ],
@@ -190,10 +225,12 @@ class MyTextWidget extends StatelessWidget {
 class RuleModel extends ChangeNotifier {
   List<String> labels = [];
   List<String> values = [];
+  List<IconInfo> iconInfos = [];
 
   void calculateResult(String income, String? rule) {
     labels.clear();
     values.clear();
+    iconInfos.clear();
 
     if (income.isNotEmpty && rule != null) {
       double incomeDouble = double.tryParse(income) ?? 0;
@@ -210,6 +247,11 @@ class RuleModel extends ChangeNotifier {
             '${(incomeDouble * 0.2).toStringAsFixed(2)} \$',
             '${(incomeDouble * 0.1).toStringAsFixed(2)} \$',
           ];
+          iconInfos = [
+            IconInfo(Icons.home, Colors.purple),
+            IconInfo(Icons.savings_rounded, Colors.lightGreen),
+            IconInfo(Icons.shopping_basket, Colors.amber),
+          ];
           break;
         case 'Rule 50/30/20':
           labels = [
@@ -221,6 +263,11 @@ class RuleModel extends ChangeNotifier {
             '${(incomeDouble * 0.5).toStringAsFixed(2)} \$',
             '${(incomeDouble * 0.3).toStringAsFixed(2)} \$',
             '${(incomeDouble * 0.2).toStringAsFixed(2)} \$',
+          ];
+          iconInfos = [
+            IconInfo(Icons.car_repair, Colors.brown),
+            IconInfo(Icons.shopping_basket, Colors.amber),
+            IconInfo(Icons.credit_card, Colors.blue),
           ];
           break;
         case 'Rule 30/30/40':
@@ -234,6 +281,11 @@ class RuleModel extends ChangeNotifier {
             '${(incomeDouble * 0.3).toStringAsFixed(2)} \$',
             '${(incomeDouble * 0.4).toStringAsFixed(2)} \$',
           ];
+          iconInfos = [
+            IconInfo(Icons.car_repair, Colors.brown),
+            IconInfo(Icons.savings_rounded, Colors.lightGreen),
+            IconInfo(Icons.shopping_basket, Colors.amber),
+          ];
           break;
         case 'Rule 80/20':
           labels = [
@@ -244,6 +296,10 @@ class RuleModel extends ChangeNotifier {
             '${(incomeDouble * 0.8).toStringAsFixed(2)} \$',
             '${(incomeDouble * 0.2).toStringAsFixed(2)} \$',
           ];
+          iconInfos = [
+            IconInfo(Icons.living, Colors.red),
+            IconInfo(Icons.savings, Colors.lightGreen),
+          ];
           break;
         case 'Rule 60/40':
           labels = [
@@ -253,6 +309,10 @@ class RuleModel extends ChangeNotifier {
           values = [
             '${(incomeDouble * 0.6).toStringAsFixed(2)} \$',
             '${(incomeDouble * 0.4).toStringAsFixed(2)} \$',
+          ];
+          iconInfos = [
+            IconInfo(Icons.living, Colors.red),
+            IconInfo(Icons.savings, Colors.lightGreen),
           ];
           break;
         default:
