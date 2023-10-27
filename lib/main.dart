@@ -20,39 +20,54 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Row(
+        body: Column(
           children: [
-            Expanded(
-              child: Center(
-                child: Container(
-                  height: 225,
-                  margin: const EdgeInsets.only(
-                      left: 16, right: 8, top: 16, bottom: 16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 0.7),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: MyForm(),
+            SizedBox(height: 20),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 16.0, left: 16.0),
+                child: Text(
+                  'Budgeting calculator',
+                  style: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-            Expanded(
-              child: Center(
-                child: Container(
-                  height: 225,
-                  margin: const EdgeInsets.only(
-                      left: 8, right: 16, top: 16, bottom: 16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black, width: 0.7),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Center(
-                    child: MyTextWidget(),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 225,
+                    margin: const EdgeInsets.only(
+                        left: 16, right: 8, top: 16, bottom: 16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 0.7),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: MyForm(),
+                    ),
                   ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    height: 225,
+                    margin: const EdgeInsets.only(
+                        left: 8, right: 16, top: 16, bottom: 16),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 0.7),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Center(
+                      child: MyTextWidget(),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
