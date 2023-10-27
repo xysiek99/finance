@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'models/icon_info.dart';
 
 void main() {
   runApp(
@@ -58,16 +59,6 @@ class MainApp extends StatelessWidget {
       ),
     );
   }
-}
-
-class IconInfo {
-  IconData icon;
-  Color color;
-
-  IconInfo(
-    this.icon,
-    this.color,
-  );
 }
 
 class MyForm extends StatefulWidget {
