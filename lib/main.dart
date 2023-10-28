@@ -4,72 +4,122 @@ import 'package:provider/provider.dart';
 import 'models/icon_info.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => RuleModel(),
-      child: const MainApp(),
-    ),
-  );
+  runApp(const MainApp());
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends StatefulWidget {
   const MainApp({super.key});
+
+  @override
+  State<MainApp> createState() => _MainAppState();
+}
+
+class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(seconds: 5),
+      vsync: this,
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.dark(),
       home: Scaffold(
-        body: Column(
-          children: [
-            SizedBox(height: 20),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 16.0, left: 16.0),
-                child: Text(
-                  'Budgeting calculator',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
+        body: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            return Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.blue,
+                    Colors.green,
+                  ],
+                  stops: [0.0, 0.7 + 0.3 * _controller.value],
+                ),
+              ),
+              child: child,
+            );
+          },
+          child: Column(
+            children: [
+              SizedBox(height: 30),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Text(
+                    'Budgeting calculator',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    height: 225,
-                    margin: const EdgeInsets.only(
-                        left: 16, right: 8, top: 16, bottom: 16),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 0.7),
-                      borderRadius: BorderRadius.circular(10),
+              SizedBox(height: 30),
+              Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      height: 225,
+                      margin: const EdgeInsets.only(left: 16, right: 8),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 0.7),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: MyForm(),
+                      ),
                     ),
-                    child: const Center(
-                      child: MyForm(),
+                  ),
+                  Expanded(
+                    child: Container(
+                      height: 225,
+                      margin: const EdgeInsets.only(left: 8, right: 16),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white, width: 0.7),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Center(
+                        child: MyTextWidget(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 30),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                  child: Text(
+                    'Budgeting rules - what they are and how do they work?',
+                    style: TextStyle(
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-                Expanded(
-                  child: Container(
-                    height: 225,
-                    margin: const EdgeInsets.only(
-                        left: 8, right: 16, top: 16, bottom: 16),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 0.7),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: const Center(
-                      child: MyTextWidget(),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
+              ),
+              SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );
