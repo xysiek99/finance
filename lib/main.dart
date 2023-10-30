@@ -4,7 +4,12 @@ import 'package:provider/provider.dart';
 import 'models/icon_info.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => RuleModel(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatefulWidget {
@@ -46,7 +51,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
+                  colors: const [
                     Colors.blue,
                     Colors.green,
                   ],
@@ -58,11 +63,11 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
           },
           child: Column(
             children: [
-              SizedBox(height: 30),
-              Align(
+              const SizedBox(height: 30),
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
                   child: Text(
                     'Budgeting calculator',
                     style: TextStyle(
@@ -72,7 +77,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               Row(
                 children: [
                   Expanded(
@@ -103,11 +108,11 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
-              Align(
+              const SizedBox(height: 30),
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
                   child: Text(
                     'Budgeting rules - what they are and how do they work?',
                     style: TextStyle(
@@ -117,7 +122,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
             ],
           ),
         ),
@@ -152,11 +157,11 @@ class _MyFormState extends State<MyForm> {
         children: [
           TextField(
             controller: _controller,
-            style: TextStyle(fontSize: 18),
+            style: const TextStyle(fontSize: 18),
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
+              border: const OutlineInputBorder(),
               labelText: 'Enter your income',
-              labelStyle: TextStyle(fontSize: 18),
+              labelStyle: const TextStyle(fontSize: 18),
               suffixIcon: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -176,7 +181,7 @@ class _MyFormState extends State<MyForm> {
                 ],
               ),
             ),
-            keyboardType: TextInputType.numberWithOptions(decimal: true),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
             ],
@@ -188,7 +193,7 @@ class _MyFormState extends State<MyForm> {
           DropdownButton<String>(
             isExpanded: true,
             value: dropdownValue,
-            hint: Text('Budgeting Rule', style: TextStyle(fontSize: 18)),
+            hint: const Text('Budgeting Rule', style: TextStyle(fontSize: 18)),
             onChanged: (String? newValue) {
               setState(() {
                 dropdownValue = newValue;
@@ -206,7 +211,7 @@ class _MyFormState extends State<MyForm> {
             ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value, style: TextStyle(fontSize: 18)),
+                child: Text(value, style: const TextStyle(fontSize: 18)),
               );
             }).toList(),
           ),
@@ -244,13 +249,13 @@ class MyTextWidget extends StatelessWidget {
                                 size: 36,
                               ),
                             ),
-                            SizedBox(width: 20),
+                            const SizedBox(width: 20),
                             Container(
                               height: 50,
                               alignment: Alignment.center,
                               child: Text(
                                 ruleModel.labels[index],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w300,
                                 ),
@@ -263,7 +268,7 @@ class MyTextWidget extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Text(
                             ruleModel.values[index],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
                             ),
@@ -273,7 +278,7 @@ class MyTextWidget extends StatelessWidget {
                     );
                   })
                 : [
-                    Text(
+                    const Text(
                       'Please choose a budgeting rule and enter your income',
                       textAlign: TextAlign.center,
                       style: TextStyle(
