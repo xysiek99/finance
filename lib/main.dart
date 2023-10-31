@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'models/icon_info.dart';
+import 'models/layout_forms.dart';
 
 void main() {
   runApp(
@@ -61,7 +62,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
               child: child,
             );
           },
-          child: Column(
+          child: ListView(
             children: [
               const SizedBox(height: 30),
               const Align(
@@ -122,7 +123,43 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                   ),
                 ),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: 30),
+              budgetRuleText(
+                'Budgeting rule 70/20/10',
+                'The 70/20/10 budgeting rule is a simple and effective way to manage your finances. '
+                    'According to this rule, you allocate 70% of your income to essential expenses such as rent, utilities, groceries, and transportation. '
+                    '20% goes towards savings and investments for your future, including retirement funds, emergency savings, or other financial goals. '
+                    'The remaining 10% is designated for personal spending, allowing you to enjoy your hobbies, dining out, or other leisure activities without guilt. '
+                    'By following the 70/20/10 rule, you can ensure a balanced financial life, securing your future while also enjoying the present.',
+              ),
+              budgetRuleText(
+                'Budgeting rule 50/30/20',
+                'The 50/30/20 budgeting rule is a straightforward method to divide your income. '
+                    '50% of your income should be allocated to necessities like housing, groceries, and bills. '
+                    '30% can be used for discretionary expenses such as entertainment, dining out, or shopping. '
+                    'Finally, 20% should be saved or invested for future financial stability. '
+                    'This rule is great for those who want a simple way to manage their finances while ensuring savings.',
+              ),
+              budgetRuleText(
+                'Budgeting rule 30/30/40',
+                'The 30/30/40 budgeting rule is a unique method where 30% of your income goes to savings, '
+                    'another 30% is allocated for discretionary spending, and the remaining 40% is used for essential expenses.'
+                    'This approach encourages a strong savings habit while still allowing for flexibility in discretionary spending.'
+                    'It is a great option for those who want to balance saving money with enjoying their lifestyle.',
+              ),
+              budgetRuleText(
+                'Budgeting rule 80/20',
+                'The 80/20 budgeting rule is a simplified method where you save 20% of your income, and the rest (80%)'
+                    'is yours to spend as you please. This rule is perfect for those who prefer a hands-off approach to budgeting'
+                    'and want to ensure they are saving a portion of their income without strict constraints on their spending.',
+              ),
+              budgetRuleText(
+                'Budgeting rule 60/40',
+                'The 60/40 budgeting rule allocates 60% of your income to essential expenses and committed spending,'
+                    'while the remaining 40% is divided among short-term savings, long-term savings, and discretionary spending.'
+                    'This approach provides a balanced way to manage your finances, ensuring that you are covering your necessary'
+                    'expenses while also saving for the future and enjoying your income.',
+              ),
             ],
           ),
         ),
@@ -160,21 +197,25 @@ class _MyFormState extends State<MyForm> {
             style: const TextStyle(fontSize: 18),
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.white),
+              ),
               labelText: 'Enter your income',
               labelStyle: const TextStyle(fontSize: 18),
+              floatingLabelStyle: TextStyle(fontSize: 18, color: Colors.white),
               suffixIcon: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
                     height: 30,
                     width: 2,
-                    color: Colors.grey,
+                    color: Colors.black26,
                   ),
                   const Padding(
                     padding: EdgeInsets.all(12.0),
                     child: Icon(
                       Icons.attach_money,
-                      color: Colors.green,
+                      color: Colors.amber,
                       size: 30,
                     ),
                   ),
