@@ -96,7 +96,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
               constraints: BoxConstraints(maxWidth: 1400),
               child: ListView(
                 children: [
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 60),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
@@ -110,7 +110,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 60),
                   Row(
                     children: [
                       Expanded(
@@ -141,7 +141,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 60),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
@@ -155,8 +155,9 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                       ),
                     ),
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 60),
                   for (var rule in budgetRules) budgetRuleText(rule),
+                  SizedBox(height: 60),
                 ],
               ),
             ),
