@@ -72,7 +72,7 @@ List<BudgetRule> budgetRules = [
         '30% can be used for discretionary expenses such as entertainment, dining out, or shopping. '
         'Finally, 20% should be saved or invested for future financial stability. '
         'This rule is great for those who want a simple way to manage their finances while ensuring savings.',
-    percentage: [0.3, 0.4, 0.4],
+    percentage: [0.3, 0.3, 0.4],
     labels: [
       'Living Expenses:',
       'Investing and Savings:',
