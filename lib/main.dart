@@ -63,70 +63,75 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
               child: child,
             );
           },
-          child: ListView(
-            children: [
-              const SizedBox(height: 30),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: Text(
-                    'Budgeting calculator',
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              Row(
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 1400),
+              child: ListView(
                 children: [
-                  Expanded(
-                    child: Container(
-                      height: 225,
-                      margin: const EdgeInsets.only(left: 16, right: 8),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 0.7),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: MyForm(),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 225,
-                      margin: const EdgeInsets.only(left: 8, right: 16),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.white, width: 0.7),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: const Center(
-                        child: MyTextWidget(),
+                  const SizedBox(height: 30),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: Text(
+                        'Budgeting calculator',
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
+                  const SizedBox(height: 30),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 225,
+                          margin: const EdgeInsets.only(left: 16, right: 8),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 0.7),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                            child: MyForm(),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: Container(
+                          height: 225,
+                          margin: const EdgeInsets.only(left: 8, right: 16),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.white, width: 0.7),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Center(
+                            child: MyTextWidget(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 30),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: Text(
+                        'Budgeting rules - what they are and how do they work?',
+                        style: TextStyle(
+                          fontSize: 36,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 30),
+                  for (var rule in budgetRules) budgetRuleText(rule),
                 ],
               ),
-              const SizedBox(height: 30),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: Text(
-                    'Budgeting rules - what they are and how do they work?',
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 30),
-              for (var rule in budgetRules) budgetRuleText(rule),
-            ],
+            ),
           ),
         ),
       ),
