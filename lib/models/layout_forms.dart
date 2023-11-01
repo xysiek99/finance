@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'budget_rule.dart';
 
-Widget budgetRuleText(String title, String description) {
+Widget budgetRuleText(BudgetRule rule) {
   return Column(
     children: [
       Align(
@@ -8,7 +9,7 @@ Widget budgetRuleText(String title, String description) {
         child: Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0),
           child: Text(
-            title,
+            rule.name,
             style: const TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
@@ -21,7 +22,7 @@ Widget budgetRuleText(String title, String description) {
         child: Padding(
           padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
           child: Text(
-            description,
+            rule.description,
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.normal,
