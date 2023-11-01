@@ -45,6 +45,34 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(120),
+          child: ClipRRect(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(30),
+            ),
+            child: AppBar(
+              title: Padding(
+                padding: const EdgeInsets.only(left: 120, right: 120),
+                child: Text(
+                  "Finansoholicy",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 48,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+              ),
+              backgroundColor: Colors.amber,
+              toolbarHeight: 120,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.vertical(
+                  bottom: Radius.circular(30),
+                ),
+              ),
+            ),
+          ),
+        ),
         body: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
