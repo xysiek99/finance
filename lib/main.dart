@@ -54,8 +54,8 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: const [
-                    Colors.blue,
-                    Colors.green,
+                    Colors.black26,
+                    Color.fromARGB(250, 45, 25, 50),
                   ],
                   stops: [0.0, 0.7 + 0.3 * _controller.value],
                 ),
