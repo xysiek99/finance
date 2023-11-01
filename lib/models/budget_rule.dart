@@ -59,7 +59,7 @@ List<BudgetRule> budgetRules = [
       'Savings and Debts:'
     ],
     iconInfos: [
-      IconInfo(Icons.car_repair, Colors.brown),
+      IconInfo(Icons.car_repair, Colors.pink),
       IconInfo(Icons.shopping_cart, Colors.amber),
       IconInfo(Icons.credit_card, Colors.blue),
     ],
@@ -79,7 +79,7 @@ List<BudgetRule> budgetRules = [
       'Consumption and Lifestyle:'
     ],
     iconInfos: [
-      IconInfo(Icons.car_repair, Colors.brown),
+      IconInfo(Icons.car_repair, Colors.pink),
       IconInfo(Icons.savings_rounded, Colors.lightGreen),
       IconInfo(Icons.shopping_cart, Colors.amber),
     ],
