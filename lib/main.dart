@@ -66,7 +66,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
           },
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 1400),
+              constraints: BoxConstraints(maxWidth: 1200),
               child: ListView(
                 children: [
                   const SizedBox(height: 60),
@@ -95,6 +95,8 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                   SizedBox(height: 60),
                   for (var rule in budgetRules) budgetRuleText(rule),
                   SizedBox(height: 60),
+                  CopyrightFooter(),
+                  SizedBox(height: 30),
                 ],
               ),
             ),
