@@ -75,29 +75,15 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                   Row(
                     children: [
                       Expanded(
-                        child: Container(
-                          height: 225,
+                        child: BuildCardWidget(
+                          child: const MyForm(),
                           margin: const EdgeInsets.only(left: 16, right: 8),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 0.7),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: MyForm(),
-                          ),
                         ),
                       ),
                       Expanded(
-                        child: Container(
-                          height: 225,
+                        child: BuildCardWidget(
+                          child: const MyTextWidget(),
                           margin: const EdgeInsets.only(left: 8, right: 16),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.white, width: 0.7),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: const Center(
-                            child: MyTextWidget(),
-                          ),
                         ),
                       ),
                     ],

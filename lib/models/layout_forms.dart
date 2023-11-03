@@ -97,3 +97,17 @@ class SectionTitle extends StatelessWidget {
     );
   }
 }
+
+Widget BuildCardWidget(
+    {required Widget child,
+    EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 8)}) {
+  return Container(
+    height: 225,
+    margin: margin,
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.white, width: 0.7),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Center(child: child),
+  );
+}
