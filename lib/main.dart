@@ -45,34 +45,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(120),
-          child: ClipRRect(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(30),
-            ),
-            child: AppBar(
-              title: Padding(
-                padding: const EdgeInsets.only(left: 120, right: 120),
-                child: Text(
-                  "Finansoholicy",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 48,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-              backgroundColor: Colors.amber,
-              toolbarHeight: 120,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(
-                  bottom: Radius.circular(30),
-                ),
-              ),
-            ),
-          ),
-        ),
+        appBar: CustomAppBar(),
         body: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
@@ -97,19 +70,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
               child: ListView(
                 children: [
                   const SizedBox(height: 60),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: Text(
-                        'Budgeting calculator',
-                        style: TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
+                  SectionTitle(titleText: 'Budgeting calculator'),
                   const SizedBox(height: 60),
                   Row(
                     children: [
@@ -142,19 +103,9 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                     ],
                   ),
                   const SizedBox(height: 60),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                      child: Text(
-                        'Budgeting rules - what they are and how do they work?',
-                        style: TextStyle(
-                          fontSize: 36,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
+                  SectionTitle(
+                      titleText:
+                          'Budgeting rules - what they are and how do they work?'),
                   SizedBox(height: 60),
                   for (var rule in budgetRules) budgetRuleText(rule),
                   SizedBox(height: 60),
