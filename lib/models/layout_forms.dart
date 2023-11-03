@@ -24,7 +24,7 @@ Widget budgetRuleText(BudgetRule rule) {
           child: Text(
             rule.description,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 18,
               fontWeight: FontWeight.normal,
             ),
           ),
@@ -50,7 +50,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
       child: AppBar(
         title: Padding(
-          padding: const EdgeInsets.only(left: 120, right: 120),
+          padding: const EdgeInsets.only(left: 160, right: 160),
           child: Text(
             "Finansoholicy",
             style: TextStyle(
@@ -110,4 +110,29 @@ Widget BuildCardWidget(
     ),
     child: Center(child: child),
   );
+}
+
+class CopyrightFooter extends StatelessWidget {
+  final String copyrightText;
+
+  const CopyrightFooter({
+    Key? key,
+    this.copyrightText = 'Copyright © 2023 | Finansoholicy',
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16.0),
+      child: Text(
+        copyrightText,
+        textAlign: TextAlign.center,
+        style: const TextStyle(
+          fontSize: 16,
+          color: Colors.grey,
+        ),
+      ),
+    );
+  }
 }
