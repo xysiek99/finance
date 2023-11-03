@@ -209,7 +209,7 @@ class _MyFormState extends State<MyForm> {
                   Container(
                     height: 30,
                     width: 2,
-                    color: Colors.black26,
+                    color: Colors.white24,
                   ),
                   const Padding(
                     padding: EdgeInsets.all(12.0),
