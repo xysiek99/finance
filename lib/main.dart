@@ -70,7 +70,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
               child: ListView(
                 children: [
                   const SizedBox(height: 60),
-                  SectionTitle(titleText: 'Budgeting calculator'),
+                  SectionTitle(titleText: 'Kalkulator budżetowy'),
                   const SizedBox(height: 60),
                   Row(
                     children: [
@@ -91,7 +91,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                   const SizedBox(height: 60),
                   SectionTitle(
                       titleText:
-                          'Budgeting rules - what they are and how do they work?'),
+                          'Reguły budżetowania - czym są i jak działają?'),
                   SizedBox(height: 60),
                   for (var rule in budgetRules) budgetRuleText(rule),
                   SizedBox(height: 60),
