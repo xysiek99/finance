@@ -139,7 +139,7 @@ class _MyFormState extends State<MyForm> {
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white),
               ),
-              labelText: 'Enter your income',
+              labelText: 'Twój przychód',
               labelStyle: const TextStyle(fontSize: 18),
               floatingLabelStyle: TextStyle(fontSize: 18, color: Colors.white),
               suffixIcon: Row(
@@ -173,7 +173,8 @@ class _MyFormState extends State<MyForm> {
           DropdownButton<String>(
             isExpanded: true,
             value: dropdownValue,
-            hint: const Text('Budgeting Rule', style: TextStyle(fontSize: 18)),
+            hint: const Text('Reguła budżetowania',
+                style: TextStyle(fontSize: 18)),
             onChanged: (String? newValue) {
               setState(() {
                 dropdownValue = newValue;
@@ -253,7 +254,7 @@ class MyTextWidget extends StatelessWidget {
                   })
                 : [
                     const Text(
-                      'Please choose a budgeting rule and enter your income',
+                      'Wybierz regułę budżetowania i wprowadź swój przychód',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 18,
