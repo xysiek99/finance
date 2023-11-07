@@ -2,34 +2,166 @@ import 'package:flutter/material.dart';
 import 'budget_rule.dart';
 
 Widget budgetRuleText(BudgetRule rule) {
+  List<String> percentageStrings = rule.percentage
+      .map((item) => '${(item * 100).toStringAsFixed(0)}% ')
+      .toList();
+  List<Widget> labelWidgets = [];
+  for (int i = 0; i < rule.labels.length; i++) {
+    String labelPercentage = percentageStrings[i];
+    String label = rule.labels[i];
+    String labelDescription = rule.labelsDescription[i];
+    labelWidgets.add(
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 4.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "• ",
+              style: TextStyle(
+                fontSize: 18,
+                height: 1.2,
+              ),
+            ),
+            Expanded(
+              child: RichText(
+                textAlign: TextAlign.justify,
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "$labelPercentage - $label ",
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    TextSpan(
+                      text: labelDescription,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> prosWidgets = rule.pros
+      .map((pro) => Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 36.0, vertical: 4.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "• ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    height: 1.2,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    pro,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ))
+      .toList();
+
+  List<Widget> consWidgets = rule.cons
+      .map((con) => Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 36.0, vertical: 4.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "• ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    height: 1.2,
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    con,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ))
+      .toList();
+
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-          child: Text(
-            rule.name,
-            style: const TextStyle(
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-            ),
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+        child: Text(
+          rule.name,
+          style: const TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),
-      Align(
-        alignment: Alignment.centerLeft,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
-          child: Text(
-            rule.description,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.normal,
-            ),
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+        child: Text(
+          rule.description,
+          textAlign: TextAlign.justify,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.normal,
           ),
         ),
       ),
+      const SizedBox(height: 10),
+      ...labelWidgets,
+      const SizedBox(height: 10),
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+        child: Text(
+          'Zalety reguły:',
+          textAlign: TextAlign.justify,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      ...prosWidgets,
+      const SizedBox(height: 10),
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+        child: Text(
+          'Wady reguły:',
+          textAlign: TextAlign.justify,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+      ...consWidgets,
       const SizedBox(height: 30),
     ],
   );
