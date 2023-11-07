@@ -76,13 +76,13 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                     children: [
                       Expanded(
                         child: BuildCardWidget(
-                          child: const MyForm(),
+                          child: const BudgetingCalculationForm(),
                           margin: const EdgeInsets.only(left: 16, right: 8),
                         ),
                       ),
                       Expanded(
                         child: BuildCardWidget(
-                          child: const MyTextWidget(),
+                          child: const BudgetingCalculationResult(),
                           margin: const EdgeInsets.only(left: 8, right: 16),
                         ),
                       ),
@@ -107,14 +107,15 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
   }
 }
 
-class MyForm extends StatefulWidget {
-  const MyForm({Key? key}) : super(key: key);
+class BudgetingCalculationForm extends StatefulWidget {
+  const BudgetingCalculationForm({Key? key}) : super(key: key);
 
   @override
-  _MyFormState createState() => _MyFormState();
+  _BudgetingCalculationFormState createState() =>
+      _BudgetingCalculationFormState();
 }
 
-class _MyFormState extends State<MyForm> {
+class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
   String? dropdownValue;
   final TextEditingController _controller = TextEditingController();
 
@@ -196,8 +197,8 @@ class _MyFormState extends State<MyForm> {
   }
 }
 
-class MyTextWidget extends StatelessWidget {
-  const MyTextWidget({Key? key}) : super(key: key);
+class BudgetingCalculationResult extends StatelessWidget {
+  const BudgetingCalculationResult({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
