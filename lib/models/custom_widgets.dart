@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'budget_rule.dart';
 import 'package:finance/config/constants.dart';
 import 'package:finance/config/styles.dart';
-import 'package:finance/utils/utils.dart';
+import 'package:finance/utils/helpers.dart';
 
 // Widgets
 Widget createItemizedRichRow(
@@ -133,31 +133,25 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   CustomAppBar({
     Key? key,
-  })  : preferredSize = Size.fromHeight(120.0),
+  })  : preferredSize = Size.fromHeight(appbarHeight),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
+      borderRadius: appbarBorderRadius,
       child: AppBar(
         title: Padding(
-          padding: const EdgeInsets.only(left: 160, right: 160),
+          padding: appBarPadding160,
           child: Text(
             pageTitle,
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 48,
-              fontWeight: FontWeight.w800,
-            ),
+            style: appbarTextStyle,
           ),
         ),
-        backgroundColor: Colors.amber,
-        toolbarHeight: 120,
+        backgroundColor: appbarBgColor,
+        toolbarHeight: appbarHeight,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
+          borderRadius: appbarBorderRadius,
         ),
       ),
     );
