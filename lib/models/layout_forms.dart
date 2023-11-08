@@ -1,126 +1,157 @@
 import 'package:flutter/material.dart';
 import 'budget_rule.dart';
 
-Widget budgetRuleText(BudgetRule rule) {
-  List<String> percentageStrings = rule.percentage
+// Data variables
+const String pageTitle = 'Finansoholicy';
+const String copyrightLabel = 'Copyright © 2023 | $pageTitle';
+
+// Const variables
+const double footerTextSize = 16.0;
+const double bodyTextSize = 18.0;
+const double headingTextSize = 28.0;
+const double titleTextSize = 36.0;
+const double bulletPointSize = 18.0;
+const Color textColor = Colors.white;
+const Color footerTextColor = Colors.grey;
+
+// Forms variables
+TextStyle bodyTextStyle = const TextStyle(
+  fontSize: bodyTextSize,
+  fontWeight: FontWeight.normal,
+  color: textColor,
+);
+
+TextStyle boldBodyTextStyle = const TextStyle(
+  fontSize: bodyTextSize,
+  fontWeight: FontWeight.bold,
+  color: textColor,
+);
+
+TextStyle headingTextStyle = const TextStyle(
+  fontSize: headingTextSize,
+  fontWeight: FontWeight.bold,
+  color: textColor,
+);
+
+TextStyle titleTextStyle = const TextStyle(
+  fontSize: titleTextSize,
+  fontWeight: FontWeight.bold,
+  color: textColor,
+);
+
+TextStyle bulletPointStyle = const TextStyle(
+  fontSize: bulletPointSize,
+  height: 1.2,
+  color: textColor,
+);
+
+TextStyle footerTextStyle = const TextStyle(
+  fontSize: footerTextSize,
+  color: footerTextColor,
+);
+
+// Paddings
+const EdgeInsets horizontalPadding16 = EdgeInsets.only(left: 16.0, right: 16.0);
+const EdgeInsets symmetricalPadding36 =
+    EdgeInsets.symmetric(horizontal: 36.0, vertical: 4.0);
+
+// Helper functions
+List<String> convertPercentagesToStrings(List<double> percentages) {
+  return percentages
       .map((item) => '${(item * 100).toStringAsFixed(0)}% ')
       .toList();
-  List<Widget> labelWidgets = [];
-  for (int i = 0; i < rule.labels.length; i++) {
-    String labelPercentage = percentageStrings[i];
-    String label = rule.labels[i];
-    String labelDescription = rule.labelsDescription[i];
-    labelWidgets.add(
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 4.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              "• ",
-              style: TextStyle(
-                fontSize: 18,
-                height: 1.2,
-              ),
-            ),
-            Expanded(
-              child: RichText(
-                textAlign: TextAlign.justify,
-                text: TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "$labelPercentage - $label ",
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
-                    TextSpan(
-                      text: labelDescription,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+}
 
-  List<Widget> prosWidgets = rule.pros
-      .map((pro) => Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 36.0, vertical: 4.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+// SizedBoxes
+SizedBox textToTextBox = const SizedBox(height: 10);
+SizedBox toFooterBox = const SizedBox(height: 30);
+
+// Widgets
+Widget createItemizedRichRow(
+    String leadingSymbol,
+    String boldText,
+    String normalText,
+    TextStyle leadingStyle,
+    TextStyle boldStyle,
+    TextStyle normalStyle) {
+  return Padding(
+    padding: symmetricalPadding36,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          leadingSymbol,
+          style: leadingStyle,
+        ),
+        Expanded(
+          child: RichText(
+            text: TextSpan(
               children: [
-                const Text(
-                  "• ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    height: 1.2,
-                  ),
+                TextSpan(
+                  text: boldText,
+                  style: boldStyle,
                 ),
-                Expanded(
-                  child: Text(
-                    pro,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
+                TextSpan(
+                  text: normalText,
+                  style: normalStyle,
                 ),
               ],
             ),
-          ))
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget createSimpleItemizedRow(
+    String leadingSymbol, String text, TextStyle textStyle) {
+  return Padding(
+    padding: symmetricalPadding36,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          leadingSymbol,
+          style: bulletPointStyle,
+        ),
+        Expanded(
+          child: Text(text, style: textStyle),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget budgetRuleText(BudgetRule rule) {
+  List<String> percentageStrings = convertPercentagesToStrings(rule.percentage);
+  List<Widget> labelWidgets = List<Widget>.generate(rule.labels.length, (i) {
+    return createItemizedRichRow(
+      "• ",
+      "${percentageStrings[i]} - ${rule.labels[i]} ",
+      rule.labelsDescription[i],
+      bulletPointStyle,
+      boldBodyTextStyle,
+      bodyTextStyle,
+    );
+  });
+
+  List<Widget> prosWidgets = rule.pros
+      .map((pro) => createSimpleItemizedRow("• ", pro, bodyTextStyle))
       .toList();
 
   List<Widget> consWidgets = rule.cons
-      .map((con) => Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 36.0, vertical: 4.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "• ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    height: 1.2,
-                  ),
-                ),
-                Expanded(
-                  child: Text(
-                    con,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.normal,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ))
+      .map((con) => createSimpleItemizedRow("• ", con, bodyTextStyle))
       .toList();
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
-        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+        padding: horizontalPadding16,
         child: Text(
           rule.name,
-          style: const TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-          ),
+          style: headingTextStyle,
         ),
       ),
       Padding(
@@ -128,41 +159,32 @@ Widget budgetRuleText(BudgetRule rule) {
         child: Text(
           rule.description,
           textAlign: TextAlign.justify,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.normal,
-          ),
+          style: bodyTextStyle,
         ),
       ),
-      const SizedBox(height: 10),
+      textToTextBox,
       ...labelWidgets,
-      const SizedBox(height: 10),
+      textToTextBox,
       Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
         child: Text(
           'Zalety reguły:',
           textAlign: TextAlign.justify,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+          style: boldBodyTextStyle,
         ),
       ),
       ...prosWidgets,
-      const SizedBox(height: 10),
+      textToTextBox,
       Padding(
         padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
         child: Text(
           'Wady reguły:',
           textAlign: TextAlign.justify,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+          style: boldBodyTextStyle,
         ),
       ),
       ...consWidgets,
-      const SizedBox(height: 30),
+      toFooterBox,
     ],
   );
 }
@@ -184,7 +206,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: Padding(
           padding: const EdgeInsets.only(left: 160, right: 160),
           child: Text(
-            "Finansoholicy",
+            pageTitle,
             style: TextStyle(
               color: Colors.black,
               fontSize: 48,
@@ -217,13 +239,10 @@ class SectionTitle extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Padding(
-        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+        padding: horizontalPadding16,
         child: Text(
           titleText,
-          style: const TextStyle(
-            fontSize: 36,
-            fontWeight: FontWeight.bold,
-          ),
+          style: titleTextStyle,
         ),
       ),
     );
@@ -249,7 +268,7 @@ class CopyrightFooter extends StatelessWidget {
 
   const CopyrightFooter({
     Key? key,
-    this.copyrightText = 'Copyright © 2023 | Finansoholicy',
+    this.copyrightText = copyrightLabel,
   }) : super(key: key);
 
   @override
@@ -260,10 +279,7 @@ class CopyrightFooter extends StatelessWidget {
       child: Text(
         copyrightText,
         textAlign: TextAlign.center,
-        style: const TextStyle(
-          fontSize: 16,
-          color: Colors.grey,
-        ),
+        style: footerTextStyle,
       ),
     );
   }
