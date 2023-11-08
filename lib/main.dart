@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'models/layout_forms.dart';
+import 'models/custom_widgets.dart';
 import 'models/budget_rule.dart';
+import 'config/styles.dart';
 import 'package:collection/collection.dart';
 
 void main() {
@@ -69,9 +70,9 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
               constraints: BoxConstraints(maxWidth: 1200),
               child: ListView(
                 children: [
-                  const SizedBox(height: 60),
+                  sectionToSectionBox,
                   SectionTitle(titleText: 'Kalkulator budżetowy'),
-                  const SizedBox(height: 60),
+                  sectionToSectionBox,
                   Row(
                     children: [
                       Expanded(
@@ -88,15 +89,15 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 60),
+                  sectionToSectionBox,
                   SectionTitle(
                       titleText:
                           'Reguły budżetowania - czym są i jak działają?'),
-                  SizedBox(height: 60),
+                  sectionToSectionBox,
                   for (var rule in budgetRules) budgetRuleText(rule),
-                  SizedBox(height: 60),
+                  sectionToSectionBox,
                   CopyrightFooter(),
-                  SizedBox(height: 30),
+                  toFooterBox,
                 ],
               ),
             ),
