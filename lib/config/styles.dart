@@ -7,6 +7,7 @@ const double headingTextSize = 28.0;
 const double titleTextSize = 36.0;
 const double bulletPointSize = 18.0;
 const Color textColor = Colors.white;
+const Color frameColor = Colors.white;
 const Color footerTextColor = Colors.grey;
 
 // Forms variables

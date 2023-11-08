@@ -194,7 +194,7 @@ Widget BuildCardWidget(
     height: 225,
     margin: margin,
     decoration: BoxDecoration(
-      border: Border.all(color: Colors.white, width: 0.7),
+      border: Border.all(color: frameColor, width: 0.7),
       borderRadius: BorderRadius.circular(10),
     ),
     child: Center(child: child),
