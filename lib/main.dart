@@ -135,15 +135,16 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
         children: [
           TextField(
             controller: _controller,
-            style: const TextStyle(fontSize: 18),
+            style: const TextStyle(fontSize: bodyTextSize),
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: BorderSide(color: frameColor),
               ),
               labelText: 'Twój przychód',
-              labelStyle: const TextStyle(fontSize: 18),
-              floatingLabelStyle: TextStyle(fontSize: 18, color: Colors.white),
+              labelStyle: const TextStyle(fontSize: bodyTextSize),
+              floatingLabelStyle:
+                  TextStyle(fontSize: bodyTextSize, color: frameColor),
               suffixIcon: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -176,7 +177,7 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
             isExpanded: true,
             value: dropdownValue,
             hint: const Text('Reguła budżetowania',
-                style: TextStyle(fontSize: 18)),
+                style: TextStyle(fontSize: bodyTextSize)),
             onChanged: (String? newValue) {
               setState(() {
                 dropdownValue = newValue;
@@ -188,7 +189,8 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
             items: budgetRules.map<DropdownMenuItem<String>>((BudgetRule rule) {
               return DropdownMenuItem<String>(
                 value: rule.name,
-                child: Text(rule.name, style: const TextStyle(fontSize: 18)),
+                child: Text(rule.name,
+                    style: const TextStyle(fontSize: bodyTextSize)),
               );
             }).toList(),
           ),
@@ -232,10 +234,7 @@ class BudgetingCalculationResult extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 ruleModel.labels[index],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300,
-                                ),
+                                style: bodyTextStyle,
                               ),
                             ),
                           ],
@@ -245,24 +244,17 @@ class BudgetingCalculationResult extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Text(
                             ruleModel.values[index],
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: boldBodyTextStyle,
                           ),
                         ),
                       ],
                     );
                   })
                 : [
-                    const Text(
+                    Text(
                       'Wybierz regułę budżetowania i wprowadź swój przychód',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w300,
-                        height: 2.5,
-                      ),
+                      style: bodyTextStyle.copyWith(height: 2.5),
                     ),
                   ],
           ),
