@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'models/layout_forms.dart';
+import 'models/custom_widgets.dart';
 import 'models/budget_rule.dart';
+import 'config/styles.dart';
 import 'package:collection/collection.dart';
 
 void main() {
@@ -69,34 +70,34 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
               constraints: BoxConstraints(maxWidth: 1200),
               child: ListView(
                 children: [
-                  const SizedBox(height: 60),
-                  SectionTitle(titleText: 'Budgeting calculator'),
-                  const SizedBox(height: 60),
+                  sectionToSectionBox,
+                  SectionTitle(titleText: 'Kalkulator budżetowy'),
+                  sectionToSectionBox,
                   Row(
                     children: [
                       Expanded(
                         child: BuildCardWidget(
-                          child: const MyForm(),
+                          child: const BudgetingCalculationForm(),
                           margin: const EdgeInsets.only(left: 16, right: 8),
                         ),
                       ),
                       Expanded(
                         child: BuildCardWidget(
-                          child: const MyTextWidget(),
+                          child: const BudgetingCalculationResult(),
                           margin: const EdgeInsets.only(left: 8, right: 16),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 60),
+                  sectionToSectionBox,
                   SectionTitle(
                       titleText:
-                          'Budgeting rules - what they are and how do they work?'),
-                  SizedBox(height: 60),
+                          'Reguły budżetowania - czym są i jak działają?'),
+                  sectionToSectionBox,
                   for (var rule in budgetRules) budgetRuleText(rule),
-                  SizedBox(height: 60),
+                  sectionToSectionBox,
                   CopyrightFooter(),
-                  SizedBox(height: 30),
+                  toFooterBox,
                 ],
               ),
             ),
@@ -107,14 +108,15 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
   }
 }
 
-class MyForm extends StatefulWidget {
-  const MyForm({Key? key}) : super(key: key);
+class BudgetingCalculationForm extends StatefulWidget {
+  const BudgetingCalculationForm({Key? key}) : super(key: key);
 
   @override
-  _MyFormState createState() => _MyFormState();
+  _BudgetingCalculationFormState createState() =>
+      _BudgetingCalculationFormState();
 }
 
-class _MyFormState extends State<MyForm> {
+class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
   String? dropdownValue;
   final TextEditingController _controller = TextEditingController();
 
@@ -133,15 +135,15 @@ class _MyFormState extends State<MyForm> {
         children: [
           TextField(
             controller: _controller,
-            style: const TextStyle(fontSize: 18),
+            style: const TextStyle(fontSize: bodyTextSize),
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white),
+                borderSide: BorderSide(color: frameColor),
               ),
-              labelText: 'Enter your income',
-              labelStyle: const TextStyle(fontSize: 18),
-              floatingLabelStyle: TextStyle(fontSize: 18, color: Colors.white),
+              labelText: 'Twój przychód',
+              labelStyle: bodyTextStyle,
+              floatingLabelStyle: bodyTextStyle.copyWith(color: frameColor),
               suffixIcon: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -173,7 +175,7 @@ class _MyFormState extends State<MyForm> {
           DropdownButton<String>(
             isExpanded: true,
             value: dropdownValue,
-            hint: const Text('Budgeting Rule', style: TextStyle(fontSize: 18)),
+            hint: Text('Reguła budżetowania', style: bodyTextStyle),
             onChanged: (String? newValue) {
               setState(() {
                 dropdownValue = newValue;
@@ -185,7 +187,7 @@ class _MyFormState extends State<MyForm> {
             items: budgetRules.map<DropdownMenuItem<String>>((BudgetRule rule) {
               return DropdownMenuItem<String>(
                 value: rule.name,
-                child: Text(rule.name, style: const TextStyle(fontSize: 18)),
+                child: Text(rule.name, style: bodyTextStyle),
               );
             }).toList(),
           ),
@@ -195,8 +197,8 @@ class _MyFormState extends State<MyForm> {
   }
 }
 
-class MyTextWidget extends StatelessWidget {
-  const MyTextWidget({Key? key}) : super(key: key);
+class BudgetingCalculationResult extends StatelessWidget {
+  const BudgetingCalculationResult({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -229,10 +231,7 @@ class MyTextWidget extends StatelessWidget {
                               alignment: Alignment.center,
                               child: Text(
                                 ruleModel.labels[index],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300,
-                                ),
+                                style: bodyTextStyle,
                               ),
                             ),
                           ],
@@ -242,24 +241,17 @@ class MyTextWidget extends StatelessWidget {
                           alignment: Alignment.center,
                           child: Text(
                             ruleModel.values[index],
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
+                            style: boldBodyTextStyle,
                           ),
                         ),
                       ],
                     );
                   })
                 : [
-                    const Text(
-                      'Please choose a budgeting rule and enter your income',
+                    Text(
+                      'Wybierz regułę budżetowania i wprowadź swój przychód',
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w300,
-                        height: 2.5,
-                      ),
+                      style: bodyTextStyle.copyWith(height: 2.5),
                     ),
                   ],
           ),
