@@ -214,35 +214,32 @@ class BudgetingCalculationResult extends StatelessWidget {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Row(
-                          children: [
-                            Container(
-                              height: 50,
-                              alignment: Alignment.center,
-                              child: Icon(
-                                ruleModel.iconInfos[index].icon,
-                                color: ruleModel.iconInfos[index].color,
-                                size: 36,
+                        Flexible(
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 50,
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  ruleModel.iconInfos[index].icon,
+                                  color: ruleModel.iconInfos[index].color,
+                                  size: 36,
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 20),
-                            Container(
-                              height: 50,
-                              alignment: Alignment.center,
-                              child: Text(
-                                ruleModel.labels[index],
-                                style: bodyTextStyle,
+                              const SizedBox(width: 20),
+                              Flexible(
+                                child: Text(
+                                  ruleModel.labels[index],
+                                  style: bodyTextStyle,
+                                  overflow: TextOverflow.visible,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          height: 50,
-                          alignment: Alignment.center,
-                          child: Text(
-                            ruleModel.values[index],
-                            style: boldBodyTextStyle,
+                            ],
                           ),
+                        ),
+                        Text(
+                          ruleModel.values[index],
+                          style: boldBodyTextStyle,
                         ),
                       ],
                     );
