@@ -5,7 +5,7 @@ import 'package:finance/config/styles.dart';
 import 'package:finance/utils/helpers.dart';
 
 // Widgets
-Widget createItemizedRichRow(
+Widget createItemizedTextRow(
     String leadingSymbol,
     String boldText,
     String normalText,
@@ -22,19 +22,18 @@ Widget createItemizedRichRow(
           style: leadingStyle,
         ),
         Expanded(
-          child: RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: boldText,
-                  style: boldStyle,
-                ),
-                TextSpan(
-                  text: normalText,
-                  style: normalStyle,
-                ),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                boldText,
+                style: boldStyle,
+              ),
+              Text(
+                normalText,
+                style: normalStyle,
+              ),
+            ],
           ),
         ),
       ],
@@ -64,7 +63,7 @@ Widget createSimpleItemizedRow(
 Widget budgetRuleText(BudgetRule rule) {
   List<String> percentageStrings = convertPercentagesToStrings(rule.percentage);
   List<Widget> labelWidgets = List<Widget>.generate(rule.labels.length, (i) {
-    return createItemizedRichRow(
+    return createItemizedTextRow(
       "• ",
       "${percentageStrings[i]} - ${rule.labels[i]} ",
       rule.labelsDescription[i],
