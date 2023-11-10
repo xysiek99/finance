@@ -142,9 +142,8 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
                 borderSide: BorderSide(color: frameColor),
               ),
               labelText: 'Twój przychód',
-              labelStyle: const TextStyle(fontSize: bodyTextSize),
-              floatingLabelStyle:
-                  TextStyle(fontSize: bodyTextSize, color: frameColor),
+              labelStyle: bodyTextStyle,
+              floatingLabelStyle: bodyTextStyle.copyWith(color: frameColor),
               suffixIcon: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -176,8 +175,7 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
           DropdownButton<String>(
             isExpanded: true,
             value: dropdownValue,
-            hint: const Text('Reguła budżetowania',
-                style: TextStyle(fontSize: bodyTextSize)),
+            hint: Text('Reguła budżetowania', style: bodyTextStyle),
             onChanged: (String? newValue) {
               setState(() {
                 dropdownValue = newValue;
@@ -189,8 +187,7 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
             items: budgetRules.map<DropdownMenuItem<String>>((BudgetRule rule) {
               return DropdownMenuItem<String>(
                 value: rule.name,
-                child: Text(rule.name,
-                    style: const TextStyle(fontSize: bodyTextSize)),
+                child: Text(rule.name, style: bodyTextStyle),
               );
             }).toList(),
           ),

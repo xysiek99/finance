@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // Const variables
-const double footerTextSize = 16.0;
-const double bodyTextSize = 18.0;
+const double footerTextSize = 14.0;
+const double bodyTextSize = 16.0;
 const double headingTextSize = 28.0;
 const double titleTextSize = 36.0;
 const double appbarTextSize = 48.0;
-const double bulletPointSize = 18.0;
+const double bulletPointSize = 16.0;
 const double appbarHeight = 120.0;
 const Color textColor = Colors.white;
 const Color frameColor = Colors.white;
@@ -15,42 +16,42 @@ const Color appbarTextColor = Colors.black;
 const Color appbarBgColor = Colors.amber;
 
 // Forms variables
-TextStyle bodyTextStyle = const TextStyle(
+TextStyle bodyTextStyle = GoogleFonts.signika(
   fontSize: bodyTextSize,
   fontWeight: FontWeight.normal,
   color: textColor,
 );
 
-TextStyle boldBodyTextStyle = const TextStyle(
+TextStyle boldBodyTextStyle = GoogleFonts.signika(
   fontSize: bodyTextSize,
   fontWeight: FontWeight.bold,
   color: textColor,
 );
 
-TextStyle headingTextStyle = const TextStyle(
+TextStyle headingTextStyle = GoogleFonts.signika(
   fontSize: headingTextSize,
   fontWeight: FontWeight.bold,
   color: textColor,
 );
 
-TextStyle titleTextStyle = const TextStyle(
+TextStyle titleTextStyle = GoogleFonts.signika(
   fontSize: titleTextSize,
   fontWeight: FontWeight.bold,
   color: textColor,
 );
 
-TextStyle bulletPointStyle = const TextStyle(
+TextStyle bulletPointStyle = GoogleFonts.signika(
   fontSize: bulletPointSize,
   height: 1.2,
   color: textColor,
 );
 
-TextStyle footerTextStyle = const TextStyle(
+TextStyle footerTextStyle = GoogleFonts.signika(
   fontSize: footerTextSize,
   color: footerTextColor,
 );
 
-TextStyle appbarTextStyle = const TextStyle(
+TextStyle appbarTextStyle = GoogleFonts.signika(
   fontSize: appbarTextSize,
   fontWeight: FontWeight.w800,
   color: appbarTextColor,
