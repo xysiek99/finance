@@ -32,7 +32,7 @@ class _MobileLayoutState extends State<MobileLayout>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: MobileAppBar(),
       body: AnimatedBuilder(
         animation: _controller,
         builder: (context, child) {

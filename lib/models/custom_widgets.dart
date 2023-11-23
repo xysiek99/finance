@@ -129,37 +129,6 @@ Widget budgetRuleText(BudgetRule rule) {
   );
 }
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  @override
-  final Size preferredSize;
-
-  CustomAppBar({
-    Key? key,
-  })  : preferredSize = Size.fromHeight(appbarHeight),
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: appbarBorderRadius,
-      child: AppBar(
-        title: Padding(
-          padding: appBarPadding160,
-          child: Text(
-            pageTitle,
-            style: appbarTextStyle,
-          ),
-        ),
-        backgroundColor: appbarBgColor,
-        toolbarHeight: appbarHeight,
-        shape: RoundedRectangleBorder(
-          borderRadius: appbarBorderRadius,
-        ),
-      ),
-    );
-  }
-}
-
 class SectionTitle extends StatelessWidget {
   final String titleText;
 
@@ -364,6 +333,70 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
             }).toList(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+// Appbars
+class WebAppBar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  final Size preferredSize;
+
+  WebAppBar({
+    Key? key,
+  })  : preferredSize = Size.fromHeight(appbarHeight),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: appbarBorderRadius,
+      child: AppBar(
+        title: Padding(
+          padding: webAppBarPadding,
+          child: Text(
+            pageTitle,
+            style: appbarTextStyle,
+          ),
+        ),
+        backgroundColor: appbarBgColor,
+        toolbarHeight: appbarHeight,
+        shape: RoundedRectangleBorder(
+          borderRadius: appbarBorderRadius,
+        ),
+      ),
+    );
+  }
+}
+
+class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
+  @override
+  final Size preferredSize;
+
+  MobileAppBar({
+    Key? key,
+  })  : preferredSize = Size.fromHeight(appbarHeight),
+        super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: appbarBorderRadius,
+      child: AppBar(
+        centerTitle: true,
+        title: Padding(
+          padding: mobileAppBarPadding,
+          child: Text(
+            pageTitle,
+            style: appbarTextStyle,
+          ),
+        ),
+        backgroundColor: appbarBgColor,
+        toolbarHeight: appbarHeight,
+        shape: RoundedRectangleBorder(
+          borderRadius: appbarBorderRadius,
+        ),
       ),
     );
   }

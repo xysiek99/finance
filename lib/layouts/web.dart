@@ -32,7 +32,7 @@ class _WebLayoutState extends State<WebLayout> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SelectionArea(
       child: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: WebAppBar(),
         body: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {

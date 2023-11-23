@@ -61,7 +61,8 @@ TextStyle appbarTextStyle = GoogleFonts.signika(
 const EdgeInsets horizontalPadding16 = EdgeInsets.only(left: 16.0, right: 16.0);
 const EdgeInsets symmetricalPadding36 =
     EdgeInsets.symmetric(horizontal: 36.0, vertical: 4.0);
-const EdgeInsets appBarPadding160 = EdgeInsets.only(left: 160, right: 160);
+const EdgeInsets webAppBarPadding = EdgeInsets.only(left: 160, right: 160);
+const EdgeInsets mobileAppBarPadding = EdgeInsets.only(left: 40, right: 40);
 
 // SizedBoxes
 SizedBox textToTextBox = const SizedBox(height: 10);
