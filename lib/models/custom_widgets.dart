@@ -7,7 +7,8 @@ import 'package:finance/config/constants.dart';
 import 'package:finance/config/styles.dart';
 import 'package:finance/utils/helpers.dart';
 
-// Widgets
+// ------------------------ GENERAL WIDGETS ------------------------ //
+
 Widget createItemizedTextRow(
     String leadingSymbol,
     String boldText,
@@ -62,6 +63,8 @@ Widget createSimpleItemizedRow(
     ),
   );
 }
+
+// ------------------------ BUDGET RULE WIDGETS ------------------------ //
 
 Widget budgetRuleText(BudgetRule rule) {
   List<String> percentageStrings = convertPercentagesToStrings(rule.percentage);
@@ -129,6 +132,74 @@ Widget budgetRuleText(BudgetRule rule) {
   );
 }
 
+Widget mobileBudgetRuleText(BudgetRule rule) {
+  List<String> percentageStrings = convertPercentagesToStrings(rule.percentage);
+  List<Widget> labelWidgets = List<Widget>.generate(rule.labels.length, (i) {
+    return createItemizedTextRow(
+      "• ",
+      "${percentageStrings[i]} - ${rule.labels[i]} ",
+      rule.labelsDescription[i],
+      bulletPointStyle,
+      boldBodyTextStyle,
+      bodyTextStyle,
+    );
+  });
+
+  List<Widget> prosWidgets = rule.pros
+      .map((pro) => createSimpleItemizedRow("• ", pro, bodyTextStyle))
+      .toList();
+
+  List<Widget> consWidgets = rule.cons
+      .map((con) => createSimpleItemizedRow("• ", con, bodyTextStyle))
+      .toList();
+
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: horizontalPadding16,
+        child: Text(
+          rule.name,
+          style: mobileHeadingTextStyle,
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+        child: Text(
+          rule.description,
+          textAlign: TextAlign.justify,
+          style: bodyTextStyle,
+        ),
+      ),
+      textToTextBox,
+      ...labelWidgets,
+      textToTextBox,
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+        child: Text(
+          'Zalety reguły:',
+          textAlign: TextAlign.justify,
+          style: boldBodyTextStyle,
+        ),
+      ),
+      ...prosWidgets,
+      textToTextBox,
+      Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 8.0),
+        child: Text(
+          'Wady reguły:',
+          textAlign: TextAlign.justify,
+          style: boldBodyTextStyle,
+        ),
+      ),
+      ...consWidgets,
+      toFooterBox,
+    ],
+  );
+}
+
+// ------------------------ SECTION TITLES ------------------------ //
+
 class SectionTitle extends StatelessWidget {
   final String titleText;
 
@@ -152,41 +223,30 @@ class SectionTitle extends StatelessWidget {
   }
 }
 
-Widget BuildCardWidget(
-    {required Widget child,
-    EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 8)}) {
-  return Container(
-    height: 225,
-    margin: margin,
-    decoration: BoxDecoration(
-      border: Border.all(color: frameColor, width: 0.7),
-      borderRadius: BorderRadius.circular(10),
-    ),
-    child: Center(child: child),
-  );
-}
+class MobileSectionTitle extends StatelessWidget {
+  final String titleText;
 
-class CopyrightFooter extends StatelessWidget {
-  final String copyrightText;
-
-  const CopyrightFooter({
+  const MobileSectionTitle({
     Key? key,
-    this.copyrightText = copyrightLabel,
+    required this.titleText,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16.0),
-      child: Text(
-        copyrightText,
-        textAlign: TextAlign.center,
-        style: footerTextStyle,
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: horizontalPadding16,
+        child: Text(
+          titleText,
+          style: mobileTitleTextStyle,
+        ),
       ),
     );
   }
 }
+
+// ------------------------ BUDGETING WIDGETS ------------------------ //
 
 class BudgetingCalculationResult extends StatelessWidget {
   const BudgetingCalculationResult({Key? key}) : super(key: key);
@@ -338,32 +398,73 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
   }
 }
 
-// Appbars
+// ------------------------ CARD WIDGET ------------------------ //
+
+Widget BuildCardWidget(
+    {required Widget child,
+    EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 8)}) {
+  return Container(
+    height: 225,
+    margin: margin,
+    decoration: BoxDecoration(
+      border: Border.all(color: frameColor, width: 0.7),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: Center(child: child),
+  );
+}
+
+// ------------------------ FOOTER ------------------------ //
+
+class CopyrightFooter extends StatelessWidget {
+  final String copyrightText;
+
+  const CopyrightFooter({
+    Key? key,
+    this.copyrightText = copyrightLabel,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16.0),
+      child: Text(
+        copyrightText,
+        textAlign: TextAlign.center,
+        style: footerTextStyle,
+      ),
+    );
+  }
+}
+
+// ------------------------ APPBAR WIDGETS ------------------------ //
+
 class WebAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
 
   WebAppBar({
     Key? key,
-  })  : preferredSize = Size.fromHeight(appbarHeight),
+  })  : preferredSize = Size.fromHeight(webAppBarHeight),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: appBarBorderRadius,
+      borderRadius: webAppBarBorderRadius,
       child: AppBar(
         title: Padding(
           padding: webAppBarPadding,
           child: Text(
             pageTitle,
-            style: appbarTextStyle,
+            style: appBarTextStyle,
           ),
         ),
-        backgroundColor: appbarBgColor,
-        toolbarHeight: appbarHeight,
+        backgroundColor: appBarBgColor,
+        toolbarHeight: webAppBarHeight,
         shape: RoundedRectangleBorder(
-          borderRadius: appBarBorderRadius,
+          borderRadius: webAppBarBorderRadius,
         ),
       ),
     );
@@ -376,26 +477,26 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   MobileAppBar({
     Key? key,
-  })  : preferredSize = Size.fromHeight(appbarHeight),
+  })  : preferredSize = Size.fromHeight(mobileAppBarHeight),
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: appBarBorderRadius,
+      borderRadius: mobileAppBarBorderRadius,
       child: AppBar(
         centerTitle: true,
         title: Padding(
           padding: mobileAppBarPadding,
           child: Text(
             pageTitle,
-            style: appbarTextStyle,
+            style: mobileAppBarTextStyle,
           ),
         ),
-        backgroundColor: appbarBgColor,
-        toolbarHeight: appbarHeight,
+        backgroundColor: appBarBgColor,
+        toolbarHeight: mobileAppBarHeight,
         shape: RoundedRectangleBorder(
-          borderRadius: appBarBorderRadius,
+          borderRadius: mobileAppBarBorderRadius,
         ),
       ),
     );

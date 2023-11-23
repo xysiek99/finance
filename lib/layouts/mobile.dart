@@ -54,24 +54,23 @@ class _MobileLayoutState extends State<MobileLayout>
         child: SingleChildScrollView(
           child: Column(
             children: [
-              sectionToSectionBox,
-              SectionTitle(titleText: 'Kalkulator budżetowy'),
-              sectionToSectionBox,
+              mobileSectionToSectionBox,
+              MobileSectionTitle(titleText: 'Kalkulator budżetowy'),
+              mobileSectionToSectionBox,
               BuildCardWidget(
                 child: const BudgetingCalculationForm(),
-                margin: const EdgeInsets.only(left: 16, right: 16, top: 8),
+                margin: horizontalPadding16,
               ),
+              mobileFormToFormBox,
               BuildCardWidget(
                 child: const BudgetingCalculationResult(),
-                margin: const EdgeInsets.only(
-                    left: 16, right: 16, top: 8, bottom: 16),
+                margin: horizontalPadding16,
               ),
-              sectionToSectionBox,
-              SectionTitle(
+              mobileSectionToSectionBox,
+              MobileSectionTitle(
                   titleText: 'Reguły budżetowania - czym są i jak działają?'),
-              sectionToSectionBox,
-              for (var rule in budgetRules) budgetRuleText(rule),
-              sectionToSectionBox,
+              mobileSectionToSectionBox,
+              for (var rule in budgetRules) mobileBudgetRuleText(rule),
               CopyrightFooter(),
               toFooterBox,
             ],
