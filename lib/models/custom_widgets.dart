@@ -276,7 +276,7 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
         children: [
           TextField(
             controller: _controller,
-            style: const TextStyle(fontSize: bodyTextSize),
+            style: bodyTextStyle,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               focusedBorder: OutlineInputBorder(
