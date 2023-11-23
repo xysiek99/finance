@@ -15,43 +15,46 @@ const Color footerTextColor = Colors.grey;
 const Color appbarTextColor = Colors.black;
 const Color appbarBgColor = Colors.amber;
 
-// Forms variables
-TextStyle bodyTextStyle = GoogleFonts.signika(
+// TextStyles variables
+TextStyle baseTextStyle = GoogleFonts.signika();
+
+// TextStyles variables
+TextStyle bodyTextStyle = baseTextStyle.copyWith(
   fontSize: bodyTextSize,
   fontWeight: FontWeight.normal,
   color: textColor,
 );
 
-TextStyle boldBodyTextStyle = GoogleFonts.signika(
+TextStyle boldBodyTextStyle = baseTextStyle.copyWith(
   fontSize: bodyTextSize,
   fontWeight: FontWeight.bold,
   color: textColor,
 );
 
-TextStyle headingTextStyle = GoogleFonts.signika(
+TextStyle headingTextStyle = baseTextStyle.copyWith(
   fontSize: headingTextSize,
   fontWeight: FontWeight.bold,
   color: textColor,
 );
 
-TextStyle titleTextStyle = GoogleFonts.signika(
+TextStyle titleTextStyle = baseTextStyle.copyWith(
   fontSize: titleTextSize,
   fontWeight: FontWeight.bold,
   color: textColor,
 );
 
-TextStyle bulletPointStyle = GoogleFonts.signika(
+TextStyle bulletPointStyle = baseTextStyle.copyWith(
   fontSize: bulletPointSize,
   height: 1.2,
   color: textColor,
 );
 
-TextStyle footerTextStyle = GoogleFonts.signika(
+TextStyle footerTextStyle = baseTextStyle.copyWith(
   fontSize: footerTextSize,
   color: footerTextColor,
 );
 
-TextStyle appbarTextStyle = GoogleFonts.signika(
+TextStyle appbarTextStyle = baseTextStyle.copyWith(
   fontSize: appbarTextSize,
   fontWeight: FontWeight.w800,
   color: appbarTextColor,
