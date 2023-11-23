@@ -70,5 +70,5 @@ SizedBox toFooterBox = const SizedBox(height: 30);
 SizedBox sectionToSectionBox = const SizedBox(height: 60);
 
 // BorderRadius
-const BorderRadius appbarBorderRadius =
+const BorderRadius appBarBorderRadius =
     BorderRadius.vertical(bottom: Radius.circular(30));

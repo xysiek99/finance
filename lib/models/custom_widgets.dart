@@ -351,7 +351,7 @@ class WebAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: appbarBorderRadius,
+      borderRadius: appBarBorderRadius,
       child: AppBar(
         title: Padding(
           padding: webAppBarPadding,
@@ -363,7 +363,7 @@ class WebAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: appbarBgColor,
         toolbarHeight: appbarHeight,
         shape: RoundedRectangleBorder(
-          borderRadius: appbarBorderRadius,
+          borderRadius: appBarBorderRadius,
         ),
       ),
     );
@@ -382,7 +382,7 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: appbarBorderRadius,
+      borderRadius: appBarBorderRadius,
       child: AppBar(
         centerTitle: true,
         title: Padding(
@@ -395,7 +395,7 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: appbarBgColor,
         toolbarHeight: appbarHeight,
         shape: RoundedRectangleBorder(
-          borderRadius: appbarBorderRadius,
+          borderRadius: appBarBorderRadius,
         ),
       ),
     );
