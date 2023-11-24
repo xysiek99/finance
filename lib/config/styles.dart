@@ -103,7 +103,7 @@ const SizedBox sectionToSectionBox = SizedBox(height: 60);
 const SizedBox mobileFormToFormBox = SizedBox(height: 20);
 const SizedBox mobileSectionToSectionBox = SizedBox(height: 40);
 
-// ------------------------ BORDER RADII ------------------------ //
+// ------------------------ BORDER RADIUS ------------------------ //
 const BorderRadius webAppBarBorderRadius =
     BorderRadius.vertical(bottom: Radius.circular(30));
 const BorderRadius mobileAppBarBorderRadius =
