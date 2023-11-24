@@ -31,49 +31,51 @@ class _MobileLayoutState extends State<MobileLayout>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MobileAppBar(),
-      body: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: const [
-                  Colors.black26,
-                  Color.fromARGB(250, 45, 25, 50),
-                ],
-                stops: [0.0, 0.7 + 0.3 * _controller.value],
+    return SelectionArea(
+      child: Scaffold(
+        appBar: MobileAppBar(),
+        body: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            return Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: const [
+                    Colors.black26,
+                    Color.fromARGB(250, 45, 25, 50),
+                  ],
+                  stops: [0.0, 0.7 + 0.3 * _controller.value],
+                ),
               ),
+              child: child,
+            );
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                mobileSectionToSectionBox,
+                MobileSectionTitle(titleText: 'Kalkulator budżetowy'),
+                mobileSectionToSectionBox,
+                BuildCardWidget(
+                  child: const MobileBudgetingCalculationForm(),
+                  margin: horizontalPadding16,
+                ),
+                mobileFormToFormBox,
+                BuildCardWidget(
+                  child: const MobileBudgetingCalculationResult(),
+                  margin: horizontalPadding16,
+                ),
+                mobileSectionToSectionBox,
+                MobileSectionTitle(
+                    titleText: 'Reguły budżetowania - czym są i jak działają?'),
+                mobileSectionToSectionBox,
+                for (var rule in budgetRules) mobileBudgetRuleText(rule),
+                CopyrightFooter(),
+                toFooterBox,
+              ],
             ),
-            child: child,
-          );
-        },
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              mobileSectionToSectionBox,
-              MobileSectionTitle(titleText: 'Kalkulator budżetowy'),
-              mobileSectionToSectionBox,
-              BuildCardWidget(
-                child: const BudgetingCalculationForm(),
-                margin: horizontalPadding16,
-              ),
-              mobileFormToFormBox,
-              BuildCardWidget(
-                child: const BudgetingCalculationResult(),
-                margin: horizontalPadding16,
-              ),
-              mobileSectionToSectionBox,
-              MobileSectionTitle(
-                  titleText: 'Reguły budżetowania - czym są i jak działają?'),
-              mobileSectionToSectionBox,
-              for (var rule in budgetRules) mobileBudgetRuleText(rule),
-              CopyrightFooter(),
-              toFooterBox,
-            ],
           ),
         ),
       ),
