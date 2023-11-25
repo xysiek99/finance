@@ -1,3 +1,4 @@
+import 'package:finance/config/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'layouts/mobile.dart';
@@ -48,6 +49,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: body,
+      title: pageTitle,
     );
   }
 }
