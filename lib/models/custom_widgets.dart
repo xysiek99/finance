@@ -379,9 +379,21 @@ class BudgetingCalculationForm extends StatefulWidget {
       _BudgetingCalculationFormState();
 }
 
-class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
+class _BudgetingCalculationFormState extends State<BudgetingCalculationForm>
+    with AutomaticKeepAliveClientMixin {
   String? dropdownValue;
   final TextEditingController _controller = TextEditingController();
+
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    super.initState();
+    final ruleModel = context.read<RuleModel>();
+    _controller.text = ruleModel.incomeText;
+    dropdownValue = ruleModel.selectedRuleName;
+  }
 
   @override
   void dispose() {
@@ -391,6 +403,7 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       padding: const EdgeInsets.all(30),
       child: Column(
@@ -431,6 +444,7 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
               FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
             ],
             onChanged: (value) {
+              context.read<RuleModel>().setIncomeText(value);
               context.read<RuleModel>().calculateResult(value, dropdownValue);
             },
           ),
@@ -443,6 +457,7 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
               setState(() {
                 dropdownValue = newValue;
               });
+              context.read<RuleModel>().setSelectedRuleName(newValue);
               context
                   .read<RuleModel>()
                   .calculateResult(_controller.text, newValue);
@@ -464,14 +479,26 @@ class MobileBudgetingCalculationForm extends StatefulWidget {
   const MobileBudgetingCalculationForm({Key? key}) : super(key: key);
 
   @override
-  _MobileBudgetingCalculationForm createState() =>
-      _MobileBudgetingCalculationForm();
+  _MobileBudgetingCalculationFormState createState() =>
+      _MobileBudgetingCalculationFormState();
 }
 
-class _MobileBudgetingCalculationForm
-    extends State<MobileBudgetingCalculationForm> {
+class _MobileBudgetingCalculationFormState
+    extends State<MobileBudgetingCalculationForm>
+    with AutomaticKeepAliveClientMixin {
   String? dropdownValue;
   final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    final ruleModel = context.read<RuleModel>();
+    _controller.text = ruleModel.incomeText;
+    dropdownValue = ruleModel.selectedRuleName;
+  }
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void dispose() {
@@ -481,6 +508,7 @@ class _MobileBudgetingCalculationForm
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Container(
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -521,6 +549,7 @@ class _MobileBudgetingCalculationForm
               FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
             ],
             onChanged: (value) {
+              context.read<RuleModel>().setIncomeText(value);
               context.read<RuleModel>().calculateResult(value, dropdownValue);
             },
           ),
@@ -533,6 +562,7 @@ class _MobileBudgetingCalculationForm
               setState(() {
                 dropdownValue = newValue;
               });
+              context.read<RuleModel>().setSelectedRuleName(newValue);
               context
                   .read<RuleModel>()
                   .calculateResult(_controller.text, newValue);

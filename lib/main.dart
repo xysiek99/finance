@@ -56,6 +56,20 @@ class RuleModel extends ChangeNotifier {
   List<String> labels = [];
   List<String> values = [];
   List<IconInfo> iconInfos = [];
+  String incomeText = '';
+  String? selectedRuleName;
+
+  void setIncomeText(String newText) {
+    incomeText = newText;
+    notifyListeners();
+  }
+
+  void setSelectedRuleName(String? newRuleName) {
+    if (selectedRuleName != newRuleName) {
+      selectedRuleName = newRuleName;
+      notifyListeners();
+    }
+  }
 
   void calculateResult(String income, String? ruleName) {
     labels.clear();
