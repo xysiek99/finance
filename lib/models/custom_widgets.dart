@@ -246,7 +246,7 @@ class MobileSectionTitle extends StatelessWidget {
   }
 }
 
-// ------------------------ BUDGETING WIDGETS ------------------------ //
+// ------------------------ BUDGETING CALCULATION WIDGETS ------------------------ //
 
 class BudgetingCalculationResult extends StatelessWidget {
   const BudgetingCalculationResult({Key? key}) : super(key: key);
@@ -309,6 +309,68 @@ class BudgetingCalculationResult extends StatelessWidget {
   }
 }
 
+class MobileBudgetingCalculationResult extends StatelessWidget {
+  const MobileBudgetingCalculationResult({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<RuleModel>(
+      builder: (context, ruleModel, child) {
+        return Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: ruleModel.labels.isNotEmpty && ruleModel.values.isNotEmpty
+                ? List.generate(ruleModel.labels.length, (index) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Row(
+                            children: [
+                              Container(
+                                height: 50,
+                                alignment: Alignment.center,
+                                child: Icon(
+                                  ruleModel.iconInfos[index].icon,
+                                  color: ruleModel.iconInfos[index].color,
+                                  size: 32,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Flexible(
+                                child: Text(
+                                  ruleModel.labels[index],
+                                  style: bodyTextStyle,
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          ruleModel.values[index],
+                          style: boldBodyTextStyle,
+                        ),
+                      ],
+                    );
+                  })
+                : [
+                    Text(
+                      'Wybierz regułę budżetowania i wprowadź swój przychód',
+                      textAlign: TextAlign.center,
+                      style: bodyTextStyle.copyWith(height: 2.5),
+                    ),
+                  ],
+          ),
+        );
+      },
+    );
+  }
+}
+
 class BudgetingCalculationForm extends StatefulWidget {
   const BudgetingCalculationForm({Key? key}) : super(key: key);
 
@@ -331,6 +393,96 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(30),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextField(
+            controller: _controller,
+            style: bodyTextStyle,
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: frameColor),
+              ),
+              labelText: 'Twój przychód',
+              labelStyle: bodyTextStyle,
+              floatingLabelStyle: bodyTextStyle.copyWith(color: frameColor),
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    height: 30,
+                    width: 2,
+                    color: Colors.white24,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Icon(
+                      Icons.attach_money,
+                      color: Colors.amber,
+                      size: 30,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
+            ],
+            onChanged: (value) {
+              context.read<RuleModel>().calculateResult(value, dropdownValue);
+            },
+          ),
+          const SizedBox(height: 25),
+          DropdownButton<String>(
+            isExpanded: true,
+            value: dropdownValue,
+            hint: Text('Reguła budżetowania', style: bodyTextStyle),
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownValue = newValue;
+              });
+              context
+                  .read<RuleModel>()
+                  .calculateResult(_controller.text, newValue);
+            },
+            items: budgetRules.map<DropdownMenuItem<String>>((BudgetRule rule) {
+              return DropdownMenuItem<String>(
+                value: rule.name,
+                child: Text(rule.name, style: bodyTextStyle),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MobileBudgetingCalculationForm extends StatefulWidget {
+  const MobileBudgetingCalculationForm({Key? key}) : super(key: key);
+
+  @override
+  _MobileBudgetingCalculationForm createState() =>
+      _MobileBudgetingCalculationForm();
+}
+
+class _MobileBudgetingCalculationForm
+    extends State<MobileBudgetingCalculationForm> {
+  String? dropdownValue;
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
