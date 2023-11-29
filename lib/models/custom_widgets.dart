@@ -375,6 +375,7 @@ class BudgetingCalculationForm extends StatefulWidget {
   const BudgetingCalculationForm({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _BudgetingCalculationFormState createState() =>
       _BudgetingCalculationFormState();
 }
@@ -479,6 +480,7 @@ class MobileBudgetingCalculationForm extends StatefulWidget {
   const MobileBudgetingCalculationForm({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _MobileBudgetingCalculationFormState createState() =>
       _MobileBudgetingCalculationFormState();
 }
@@ -582,6 +584,7 @@ class _MobileBudgetingCalculationFormState
 
 // ------------------------ CARD WIDGET ------------------------ //
 
+// ignore: non_constant_identifier_names
 Widget BuildCardWidget(
     {required Widget child,
     EdgeInsets margin = const EdgeInsets.symmetric(horizontal: 8)}) {

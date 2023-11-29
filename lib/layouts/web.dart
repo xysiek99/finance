@@ -7,6 +7,7 @@ class WebLayout extends StatefulWidget {
   const WebLayout({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _WebLayoutState createState() => _WebLayoutState();
 }
 
@@ -54,36 +55,38 @@ class _WebLayoutState extends State<WebLayout> with TickerProviderStateMixin {
           child: Center(
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 1200),
-              child: ListView(
-                children: [
-                  sectionToSectionBox,
-                  const SectionTitle(titleText: 'Kalkulator budżetowy'),
-                  sectionToSectionBox,
-                  Row(
-                    children: [
-                      Expanded(
-                        child: BuildCardWidget(
-                          child: const BudgetingCalculationForm(),
-                          margin: const EdgeInsets.only(left: 16, right: 8),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    sectionToSectionBox,
+                    const SectionTitle(titleText: 'Kalkulator budżetowy'),
+                    sectionToSectionBox,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: BuildCardWidget(
+                            child: const BudgetingCalculationForm(),
+                            margin: const EdgeInsets.only(left: 16, right: 8),
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: BuildCardWidget(
-                          child: const BudgetingCalculationResult(),
-                          margin: const EdgeInsets.only(left: 8, right: 16),
+                        Expanded(
+                          child: BuildCardWidget(
+                            child: const BudgetingCalculationResult(),
+                            margin: const EdgeInsets.only(left: 8, right: 16),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  sectionToSectionBox,
-                  const SectionTitle(
-                      titleText:
-                          'Reguły budżetowania - czym są i jak działają?'),
-                  sectionToSectionBox,
-                  for (var rule in budgetRules) budgetRuleText(rule),
-                  const CopyrightFooter(),
-                  toFooterBox,
-                ],
+                      ],
+                    ),
+                    sectionToSectionBox,
+                    const SectionTitle(
+                        titleText:
+                            'Reguły budżetowania - czym są i jak działają?'),
+                    sectionToSectionBox,
+                    for (var rule in budgetRules) budgetRuleText(rule),
+                    const CopyrightFooter(),
+                    toFooterBox,
+                  ],
+                ),
               ),
             ),
           ),
