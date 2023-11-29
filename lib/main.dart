@@ -43,7 +43,7 @@ class _MainAppState extends State<MainApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 750;
-    Widget body = isMobile ? MobileLayout() : WebLayout();
+    Widget body = isMobile ? const MobileLayout() : const WebLayout();
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

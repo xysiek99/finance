@@ -33,7 +33,7 @@ class _MobileLayoutState extends State<MobileLayout>
   Widget build(BuildContext context) {
     return SelectionArea(
       child: Scaffold(
-        appBar: MobileAppBar(),
+        appBar: const MobileAppBar(),
         body: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
@@ -56,7 +56,7 @@ class _MobileLayoutState extends State<MobileLayout>
             child: Column(
               children: [
                 mobileSectionToSectionBox,
-                MobileSectionTitle(titleText: 'Kalkulator budżetowy'),
+                const MobileSectionTitle(titleText: 'Kalkulator budżetowy'),
                 mobileSectionToSectionBox,
                 BuildCardWidget(
                   child: const MobileBudgetingCalculationForm(),
@@ -68,11 +68,11 @@ class _MobileLayoutState extends State<MobileLayout>
                   margin: horizontalPadding16,
                 ),
                 mobileSectionToSectionBox,
-                MobileSectionTitle(
+                const MobileSectionTitle(
                     titleText: 'Reguły budżetowania - czym są i jak działają?'),
                 mobileSectionToSectionBox,
                 for (var rule in budgetRules) mobileBudgetRuleText(rule),
-                CopyrightFooter(),
+                const CopyrightFooter(),
                 toFooterBox,
               ],
             ),

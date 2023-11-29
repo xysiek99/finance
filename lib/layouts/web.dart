@@ -32,7 +32,7 @@ class _WebLayoutState extends State<WebLayout> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return SelectionArea(
       child: Scaffold(
-        appBar: WebAppBar(),
+        appBar: const WebAppBar(),
         body: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
@@ -53,11 +53,11 @@ class _WebLayoutState extends State<WebLayout> with TickerProviderStateMixin {
           },
           child: Center(
             child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: 1200),
+              constraints: const BoxConstraints(maxWidth: 1200),
               child: ListView(
                 children: [
                   sectionToSectionBox,
-                  SectionTitle(titleText: 'Kalkulator budżetowy'),
+                  const SectionTitle(titleText: 'Kalkulator budżetowy'),
                   sectionToSectionBox,
                   Row(
                     children: [
@@ -76,13 +76,12 @@ class _WebLayoutState extends State<WebLayout> with TickerProviderStateMixin {
                     ],
                   ),
                   sectionToSectionBox,
-                  SectionTitle(
+                  const SectionTitle(
                       titleText:
                           'Reguły budżetowania - czym są i jak działają?'),
                   sectionToSectionBox,
                   for (var rule in budgetRules) budgetRuleText(rule),
-                  sectionToSectionBox,
-                  CopyrightFooter(),
+                  const CopyrightFooter(),
                   toFooterBox,
                 ],
               ),

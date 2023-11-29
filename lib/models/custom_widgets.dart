@@ -414,7 +414,7 @@ class _BudgetingCalculationFormState extends State<BudgetingCalculationForm>
             style: bodyTextStyle,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: frameColor),
               ),
               labelText: 'Twój przychód',
@@ -519,7 +519,7 @@ class _MobileBudgetingCalculationFormState
             style: bodyTextStyle,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
-              focusedBorder: OutlineInputBorder(
+              focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: frameColor),
               ),
               labelText: 'Twój przychód',
@@ -626,9 +626,9 @@ class WebAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
 
-  WebAppBar({
+  const WebAppBar({
     Key? key,
-  })  : preferredSize = Size.fromHeight(webAppBarHeight),
+  })  : preferredSize = const Size.fromHeight(webAppBarHeight),
         super(key: key);
 
   @override
@@ -645,7 +645,7 @@ class WebAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         backgroundColor: appBarBgColor,
         toolbarHeight: webAppBarHeight,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: webAppBarBorderRadius,
         ),
       ),
@@ -657,9 +657,9 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   final Size preferredSize;
 
-  MobileAppBar({
+  const MobileAppBar({
     Key? key,
-  })  : preferredSize = Size.fromHeight(mobileAppBarHeight),
+  })  : preferredSize = const Size.fromHeight(mobileAppBarHeight),
         super(key: key);
 
   @override
@@ -677,7 +677,7 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         backgroundColor: appBarBgColor,
         toolbarHeight: mobileAppBarHeight,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: mobileAppBarBorderRadius,
         ),
       ),
